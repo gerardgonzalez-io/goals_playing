@@ -10,7 +10,7 @@ struct Goals_PlayingApp: App
     {
         WindowGroup
         {
-            ContentView()
+            TopicListView()
                 //.environment(dataContainer)
         }
         .modelContainer(dataContainer.modelContainer)

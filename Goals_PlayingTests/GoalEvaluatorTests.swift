@@ -19,8 +19,8 @@ struct GoalEvaluatorTests
         let sessionDay2 = date(year: 2000, month: 2, day: 2)
 
         let sessions = [
-            StudySession(topicID: topicID, startDate: sessionDay1, endDate: sessionDay1, durationSeconds: 3_900),
-            StudySession(topicID: topicID, startDate: sessionDay2, endDate: sessionDay2, durationSeconds: 3_900)
+            StudySession(topicID: topicID, startDate: sessionDay1, endDate: sessionDay1.addingTimeInterval(3_900)),
+            StudySession(topicID: topicID, startDate: sessionDay2, endDate: sessionDay2.addingTimeInterval(3_900))
         ]
 
         let result = evaluator.reachedGoalsByDay(sessions: sessions, goals: [goal])
@@ -44,8 +44,8 @@ struct GoalEvaluatorTests
         let sessionAfterChange = date(year: 2000, month: 5, day: 5)
 
         let sessions = [
-            StudySession(topicID: topicID, startDate: sessionBeforeChange, endDate: sessionBeforeChange, durationSeconds: 3_900),
-            StudySession(topicID: topicID, startDate: sessionAfterChange, endDate: sessionAfterChange, durationSeconds: 5_700)
+            StudySession(topicID: topicID, startDate: sessionBeforeChange, endDate: sessionBeforeChange.addingTimeInterval(3_900)),
+            StudySession(topicID: topicID, startDate: sessionAfterChange, endDate: sessionAfterChange.addingTimeInterval(5_700))
         ]
 
         let result = evaluator.reachedGoalsByDay(sessions: sessions, goals: [firstGoal, secondGoal])
@@ -80,7 +80,7 @@ struct GoalEvaluatorTests
         ]
 
         let studySessions = sessions.map {
-            StudySession(topicID: topicID, startDate: $0.0, endDate: $0.0, durationSeconds: $0.1)
+            StudySession(topicID: topicID, startDate: $0.0, endDate: $0.0.addingTimeInterval($0.1))
         }
 
         let result = evaluator.reachedGoalsByDay(sessions: studySessions, goals: goals)
@@ -110,9 +110,9 @@ struct GoalEvaluatorTests
         let afterNextChange = date(year: 2000, month: 3, day: 22)
 
         let studySessions = [
-            StudySession(topicID: topicID, startDate: dayBeforeSameDayChange, endDate: dayBeforeSameDayChange, durationSeconds: 3_100),
-            StudySession(topicID: topicID, startDate: sameDayOfChange, endDate: sameDayOfChange, durationSeconds: 5_000),
-            StudySession(topicID: topicID, startDate: afterNextChange, endDate: afterNextChange, durationSeconds: 5_900)
+            StudySession(topicID: topicID, startDate: dayBeforeSameDayChange, endDate: dayBeforeSameDayChange.addingTimeInterval(3_100)),
+            StudySession(topicID: topicID, startDate: sameDayOfChange, endDate: sameDayOfChange.addingTimeInterval(5_000)),
+            StudySession(topicID: topicID, startDate: afterNextChange, endDate: afterNextChange.addingTimeInterval(5_900))
         ]
 
         let result = evaluator.reachedGoalsByDay(sessions: studySessions, goals: goals)

@@ -37,8 +37,7 @@ struct StreakCalculatorTests
             return StudySession(
                 topicID: UUID(),
                 startDate: startDate,
-                endDate: endDate,
-                durationSeconds: 1_800
+                endDate: endDate
             )
         }
 
