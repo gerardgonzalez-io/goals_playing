@@ -27,6 +27,7 @@
 		FD3577BA2FB770D6004F169D /* TopicDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3577B92FB770D6004F169D /* TopicDetailView.swift */; };
 		FD3577BC2FB7741C004F169D /* TimerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3577BB2FB7741C004F169D /* TimerScreen.swift */; };
 		FD3577BE2FB775A3004F169D /* TopicTimesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3577BD2FB775A3004F169D /* TopicTimesScreen.swift */; };
+		FD47E5B02FBE00B900039A6B /* GoalEvaluator_old.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD47E5AF2FBE00B900039A6B /* GoalEvaluator_old.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		FD3577B92FB770D6004F169D /* TopicDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicDetailView.swift; sourceTree = "<group>"; };
 		FD3577BB2FB7741C004F169D /* TimerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerScreen.swift; sourceTree = "<group>"; };
 		FD3577BD2FB775A3004F169D /* TopicTimesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicTimesScreen.swift; sourceTree = "<group>"; };
+		FD47E5AF2FBE00B900039A6B /* GoalEvaluator_old.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalEvaluator_old.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 				FD35776F2FB67945004F169D /* TimeCalculator.swift */,
 				FD3577A82FB74D61004F169D /* StreakCalculator.swift */,
 				FD3577AE2FB7561F004F169D /* GoalEvaluator.swift */,
+				FD47E5AF2FBE00B900039A6B /* GoalEvaluator_old.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 				FD3577BA2FB770D6004F169D /* TopicDetailView.swift in Sources */,
 				FD35775A2FB665B3004F169D /* StudySession.swift in Sources */,
 				FD3577B42FB76656004F169D /* Timer.swift in Sources */,
+				FD47E5B02FBE00B900039A6B /* GoalEvaluator_old.swift in Sources */,
 				FD3577B62FB76CDC004F169D /* TopicEntryView.swift in Sources */,
 				FD35775C2FB665B5004F169D /* Goal.swift in Sources */,
 				FD3577AF2FB7561F004F169D /* GoalEvaluator.swift in Sources */,

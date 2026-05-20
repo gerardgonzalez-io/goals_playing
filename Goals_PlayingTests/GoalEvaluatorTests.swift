@@ -7,6 +7,43 @@ struct GoalEvaluatorTests
     let evaluator = GoalEvaluator()
     let calendar = Calendar.current
 
+    @Test("Measure reachedGoalsByDay execution time")
+    func measureReachedGoalsByDayExecutionTime()
+    {
+        let topicID = UUID()
+
+        let goal = Goal(
+            topicID: topicID,
+            targetSecondsPerDay: 3_600,
+            createdAt: date(year: 2000, month: 1, day: 1)
+        )
+
+        let sessions = (0..<1_500).map { i in
+            let startDate = calendar.date(
+                byAdding: .day,
+                value: i,
+                to: date(year: 2000, month: 1, day: 1)
+            )!
+
+            return StudySession(
+                topicID: topicID,
+                startDate: startDate,
+                endDate: startDate.addingTimeInterval(3_900)
+            )
+        }
+
+        let clock = ContinuousClock()
+
+        let duration = clock.measure {
+            _ = evaluator.reachedGoalsByDay(
+                sessions: sessions,
+                goals: [goal]
+            )
+        }
+
+        print("reachedGoalsByDay took:", duration)
+    }
+
     @Test("Single goal applies to all future sessions")
     func singleGoalAppliesToAllFutureSessions()
     {
