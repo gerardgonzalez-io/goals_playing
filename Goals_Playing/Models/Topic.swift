@@ -22,7 +22,7 @@ extension Topic
 
     static let sampleData = [
         Topic(name: "Mathematics"),
-        Topic(name: "Chemistry and Organic Reactions Deep Practice"),
+        Topic(name: "Chemistry"),
         Topic(name: "History")
     ]
 }

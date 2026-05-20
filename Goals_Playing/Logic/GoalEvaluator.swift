@@ -6,7 +6,7 @@ struct GoalEvaluator
 
     func reachedGoalsByDay(sessions: [StudySession], goals: [Goal]) -> [Date: Bool]
     {
-        let uniqueDays = Set(sessions.map { calendar.startOfDay(for: $0.endDate) })
+        let uniqueDays = daysCoveredBySessions(sessions)
         var result: [Date: Bool] = [:]
 
         for day in uniqueDays {
@@ -25,10 +25,39 @@ struct GoalEvaluator
 
     private func sessionsCompleted(on day: Date, sessions: [StudySession]) -> TimeInterval
     {
-        let normalizedDay = calendar.startOfDay(for: day)
-        return sessions
-            .filter { calendar.isDate($0.endDate, inSameDayAs: normalizedDay) }
-            .reduce(0) { $0 + $1.durationSeconds }
+        guard let dayInterval = calendar.dateInterval(of: .day, for: day) else {
+            return 0
+        }
+
+        return sessions.reduce(0) { total, session in
+            let overlapStart = max(session.startDate, dayInterval.start)
+            let overlapEnd = min(session.endDate, dayInterval.end)
+
+            guard overlapStart < overlapEnd else {
+                return total
+            }
+
+            return total + overlapEnd.timeIntervalSince(overlapStart)
+        }
+    }
+
+    private func daysCoveredBySessions(_ sessions: [StudySession]) -> [Date]
+    {
+        var days = Set<Date>()
+
+        for session in sessions where session.startDate < session.endDate {
+            var currentDay = calendar.startOfDay(for: session.startDate)
+
+            while currentDay < session.endDate {
+                days.insert(currentDay)
+                guard let nextDay = calendar.date(byAdding: .day, value: 1, to: currentDay) else {
+                    break
+                }
+                currentDay = nextDay
+            }
+        }
+
+        return days.sorted()
     }
 
     private func goal(for day: Date, in goals: [Goal]) -> Goal?

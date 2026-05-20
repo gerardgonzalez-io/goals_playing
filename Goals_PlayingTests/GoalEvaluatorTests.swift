@@ -122,6 +122,27 @@ struct GoalEvaluatorTests
         #expect(result[calendar.startOfDay(for: afterNextChange)] == false)
     }
 
+    @Test("Cross-day session reaches goal on both days")
+    func crossDaySessionReachesGoalOnBothDays()
+    {
+        let topicID = UUID()
+
+        let startDate = dateTime(year: 2022, month: 12, day: 7, hour: 22, minute: 0)
+        let endDate = dateTime(year: 2022, month: 12, day: 8, hour: 2, minute: 0)
+
+        let firstDayGoal = Goal(topicID: topicID, targetSecondsPerDay: 3_600, createdAt: date(year: 2022, month: 12, day: 7))
+        let secondDayGoal = Goal(topicID: topicID, targetSecondsPerDay: 3_600, createdAt: date(year: 2022, month: 12, day: 8))
+
+        let sessions = [
+            StudySession(topicID: topicID, startDate: startDate, endDate: endDate)
+        ]
+
+        let result = evaluator.reachedGoalsByDay(sessions: sessions, goals: [firstDayGoal, secondDayGoal])
+
+        #expect(result[calendar.startOfDay(for: date(year: 2022, month: 12, day: 7))] == true)
+        #expect(result[calendar.startOfDay(for: date(year: 2022, month: 12, day: 8))] == true)
+    }
+
     private func date(year: Int, month: Int, day: Int) -> Date
     {
         let components = DateComponents(calendar: calendar, year: year, month: month, day: day)
