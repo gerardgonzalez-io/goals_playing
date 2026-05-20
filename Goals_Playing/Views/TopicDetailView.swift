@@ -9,7 +9,7 @@ struct TopicDetailView: View
     {
         List
         {
-            NavigationLink(value: TopicDetailRoute.timer)
+            NavigationLink(value: TopicDetailRoute.timerView)
             {
                 topicCard(
                     title: "Timer",
@@ -18,7 +18,7 @@ struct TopicDetailView: View
                 )
             }
 
-            NavigationLink(value: TopicDetailRoute.streak)
+            NavigationLink(value: TopicDetailRoute.streakView)
             {
                 topicCard(
                     title: "Streak",
@@ -27,7 +27,7 @@ struct TopicDetailView: View
                 )
             }
 
-            NavigationLink(value: TopicDetailRoute.times)
+            NavigationLink(value: TopicDetailRoute.timesView)
             {
                 topicCard(
                     title: "Times",
@@ -40,11 +40,11 @@ struct TopicDetailView: View
         .navigationBarTitleDisplayMode(.inline)
         .navigationDestination(for: TopicDetailRoute.self) { route in
             switch route {
-            case .timer:
+            case .timerView:
                 TimerScreen(topicID: topicID, topicName: topicName)
-            case .streak:
+            case .streakView:
                 TopicStreakScreen(topicName: topicName)
-            case .times:
+            case .timesView:
                 TopicTimesScreen(topicID: topicID, topicName: topicName)
             }
         }
@@ -67,12 +67,6 @@ struct TopicDetailView: View
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
-
-            Spacer()
-
-            Image(systemName: "chevron.right")
-                .font(.footnote)
-                .foregroundStyle(.secondary)
         }
         .padding(.vertical, 8)
     }
@@ -80,9 +74,9 @@ struct TopicDetailView: View
 
 private enum TopicDetailRoute: Hashable
 {
-    case timer
-    case streak
-    case times
+    case timerView
+    case streakView
+    case timesView
 }
 
 private struct TopicStreakScreen: View
