@@ -82,8 +82,8 @@ struct TimeCalculatorTests
         let calendar = Calendar(identifier: .gregorian)
         let topicID = UUID()
 
-        // Entire session: 2h crossing midnight.
-        let sessionStart = calendar.date(from: DateComponents(year: 2000, month: 1, day: 14, hour: 23, minute: 0))!
+        // Entire session: 1h 50m crossing midnight.
+        let sessionStart = calendar.date(from: DateComponents(year: 2000, month: 1, day: 14, hour: 23, minute: 10))!
         let sessionEnd = calendar.date(from: DateComponents(year: 2000, month: 1, day: 15, hour: 1, minute: 0))!
 
         let intervalDay1Start = calendar.date(from: DateComponents(year: 2000, month: 1, day: 14, hour: 23, minute: 10))!
@@ -118,8 +118,8 @@ struct TimeCalculatorTests
         let calendar = Calendar(identifier: .gregorian)
         let topicID = UUID()
 
-        // Entire session: 3h crossing midnight.
-        let sessionStart = calendar.date(from: DateComponents(year: 2000, month: 1, day: 16, hour: 22, minute: 30))!
+        // Entire session: 2h 50m crossing midnight.
+        let sessionStart = calendar.date(from: DateComponents(year: 2000, month: 1, day: 16, hour: 22, minute: 40))!
         let sessionEnd = calendar.date(from: DateComponents(year: 2000, month: 1, day: 17, hour: 1, minute: 30))!
 
         let interval1Start = calendar.date(from: DateComponents(year: 2000, month: 1, day: 16, hour: 22, minute: 40))!
@@ -298,10 +298,10 @@ struct TimeCalculatorTests
                     )
                 ]
             ),
-            // Sample 2: 2h session crossing midnight with two same-day intervals (40m + 40m = 1h20m).
+            // Sample 2: 1h50m session crossing midnight with two same-day intervals (40m + 40m = 1h20m).
             StudySession(
                 topicID: topicID,
-                startDate: calendar.date(from: DateComponents(year: 2000, month: 1, day: 14, hour: 23, minute: 0))!,
+                startDate: calendar.date(from: DateComponents(year: 2000, month: 1, day: 14, hour: 23, minute: 10))!,
                 endDate: calendar.date(from: DateComponents(year: 2000, month: 1, day: 15, hour: 1, minute: 0))!,
                 sessionIntervals: [
                     SessionInterval(
@@ -314,10 +314,10 @@ struct TimeCalculatorTests
                     )
                 ]
             ),
-            // Sample 3: 3h session crossing midnight with three intervals (40m + 30m crossing + 15m = 1h25m).
+            // Sample 3: 2h50m session crossing midnight with three intervals (40m + 30m crossing + 15m = 1h25m).
             StudySession(
                 topicID: topicID,
-                startDate: calendar.date(from: DateComponents(year: 2000, month: 1, day: 16, hour: 22, minute: 30))!,
+                startDate: calendar.date(from: DateComponents(year: 2000, month: 1, day: 16, hour: 22, minute: 40))!,
                 endDate: calendar.date(from: DateComponents(year: 2000, month: 1, day: 17, hour: 1, minute: 30))!,
                 sessionIntervals: [
                     SessionInterval(
