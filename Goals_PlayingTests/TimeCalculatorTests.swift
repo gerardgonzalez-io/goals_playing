@@ -340,3 +340,113 @@ struct TimeCalculatorTests
         #expect(result == 13_500) // 3h 45m
     }
 }
+extension TimeCalculatorTests
+{
+    @Test("Measure dailyTime execution time")
+    func measureDailyTimeExecutionTime()
+    {
+        let calendar = Calendar(identifier: .gregorian)
+        let topicID = UUID()
+        let targetDay = date(year: 2000, month: 1, day: 20, hour: 12, minute: 0, calendar: calendar)
+
+        let sessions = (0..<20_500).map
+        { i in
+            let dayStart = calendar.date(
+                byAdding: .day,
+                value: i % 30,
+                to: date(year: 2000, month: 1, day: 1, hour: 22, minute: 30, calendar: calendar)
+            )!
+
+            let interval1Start = dayStart
+            let interval1End = dayStart.addingTimeInterval(1_200) // 20m
+            let interval2Start = dayStart.addingTimeInterval(4_200) // 23:40
+            let interval2End = dayStart.addingTimeInterval(6_000) // 00:10 next day (crossing)
+
+            return StudySession(
+                topicID: topicID,
+                startDate: dayStart,
+                endDate: dayStart.addingTimeInterval(10_800), // 3h
+                sessionIntervals: [
+                    SessionInterval(startDate: interval1Start, endDate: interval1End),
+                    SessionInterval(startDate: interval2Start, endDate: interval2End)
+                ]
+            )
+        }
+
+        let clock = ContinuousClock()
+        let duration = clock.measure {
+            _ = TimeCalculator.dailyTime(
+                from: sessions,
+                on: targetDay,
+                calendar: calendar
+            )
+        }
+
+        print("dailyTime took:", duration)
+    }
+
+    @Test("Measure totalTime execution time")
+    func measureTotalTimeExecutionTime()
+    {
+        let calendar = Calendar(identifier: .gregorian)
+        let topicID = UUID()
+
+        let sessions = (0..<20_500).map { i in
+            let baseDate = calendar.date(
+                byAdding: .day,
+                value: i,
+                to: date(year: 2000, month: 1, day: 1, hour: 8, minute: 0, calendar: calendar)
+            )!
+
+            return StudySession(
+                topicID: topicID,
+                startDate: baseDate,
+                endDate: baseDate.addingTimeInterval(7_200), // 2h
+                sessionIntervals: [
+                    SessionInterval(
+                        startDate: baseDate,
+                        endDate: baseDate.addingTimeInterval(1_500) // 25m
+                    ),
+                    SessionInterval(
+                        startDate: baseDate.addingTimeInterval(1_800),
+                        endDate: baseDate.addingTimeInterval(3_000) // 20m
+                    ),
+                    SessionInterval(
+                        startDate: baseDate.addingTimeInterval(3_600),
+                        endDate: baseDate.addingTimeInterval(4_500) // 15m
+                    ),
+                    SessionInterval(
+                        startDate: baseDate.addingTimeInterval(5_000),
+                        endDate: baseDate.addingTimeInterval(6_200) // 20m
+                    )
+                ]
+            )
+        }
+
+        let clock = ContinuousClock()
+        let duration = clock.measure {
+            _ = TimeCalculator.totalTime(from: sessions)
+        }
+
+        print("totalTime took:", duration)
+    }
+
+    private func date(
+        year: Int,
+        month: Int,
+        day: Int,
+        hour: Int = 0,
+        minute: Int = 0,
+        calendar: Calendar
+    ) -> Date
+    {
+        calendar.date(from: DateComponents(
+            year: year,
+            month: month,
+            day: day,
+            hour: hour,
+            minute: minute
+        ))!
+    }
+}
+

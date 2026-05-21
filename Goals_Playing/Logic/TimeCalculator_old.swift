@@ -1,3 +1,10 @@
+//
+//  TimeCalculator_old.swift
+//  Goals_Playing
+//
+//  Created by Adolfo Gerard Montilla Gonzalez on 21-05-26.
+//
+
 import Foundation
 
 /// Utility for calculating study time from session intervals (real active study time).
@@ -12,12 +19,12 @@ import Foundation
 /// Methods are static because calculations only depend on input parameters.
 /// Use `TimeCalculator.dailyTime(...)` instead of creating `TimeCalculator()`.
 /// If this type later needs injected dependencies or state, instance methods would be more appropriate.
-struct TimeCalculator
+struct TimeCalculatorOld
 {
     /*
      ◇ Test "Measure dailyTime execution time" started.
-     dailyTime took: 0.018348834 seconds
-     */
+     dailyTime took: 0.018896959 seconds
+    */
     static func dailyTime(
         from studySessions: [StudySession],
         on date: Date = .now,
@@ -27,44 +34,30 @@ struct TimeCalculator
             return 0
         }
 
-        let dayStart = dayInterval.start
-        let dayEnd = dayInterval.end
+        return studySessions.reduce(0) { total, session in
+            let intervalsTotal = session.sessionIntervals.reduce(0) { intervalTotal, interval in
+                let overlapStart = max(interval.startDate, dayInterval.start)
+                let overlapEnd = min(interval.endDate, dayInterval.end)
 
-        var total: TimeInterval = 0
-
-        for session in studySessions
-        {
-            for interval in session.sessionIntervals
-            {
-                let overlapStart = max(interval.startDate, dayStart)
-                let overlapEnd = min(interval.endDate, dayEnd)
-
-                if overlapStart < overlapEnd {
-                    total += overlapEnd.timeIntervalSince(overlapStart)
+                guard overlapStart < overlapEnd else {
+                    return intervalTotal
                 }
-            }
-        }
 
-        return total
+                return intervalTotal + overlapEnd.timeIntervalSince(overlapStart)
+            }
+
+            return total + intervalsTotal
+        }
     }
 
     /*
      ◇ Test "Measure totalTime execution time" started.
-     totalTime took: 0.022743 seconds
+     totalTime took: 0.021160417 seconds
     */
     static func totalTime(from studySessions: [StudySession]) -> TimeInterval
     {
-        var total: TimeInterval = 0
-
-        for session in studySessions
-        {
-            for interval in session.sessionIntervals
-            {
-                total += interval.durationSeconds
-            }
+        studySessions.reduce(0) { total, session in
+            total + session.sessionIntervals.reduce(0) { $0 + $1.durationSeconds }
         }
-
-        return total
     }
 }
-

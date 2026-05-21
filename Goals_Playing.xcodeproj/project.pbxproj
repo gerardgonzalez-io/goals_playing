@@ -29,6 +29,7 @@
 		FD3577BE2FB775A3004F169D /* TopicTimesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3577BD2FB775A3004F169D /* TopicTimesScreen.swift */; };
 		FD47E5B02FBE00B900039A6B /* GoalEvaluator_old.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD47E5AF2FBE00B900039A6B /* GoalEvaluator_old.swift */; };
 		FD47E62B2FBF50F100039A6B /* SessionInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD47E62A2FBF50F100039A6B /* SessionInterval.swift */; };
+		FD47E62D2FBF897900039A6B /* TimeCalculator_old.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD47E62C2FBF897900039A6B /* TimeCalculator_old.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		FD3577BD2FB775A3004F169D /* TopicTimesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicTimesScreen.swift; sourceTree = "<group>"; };
 		FD47E5AF2FBE00B900039A6B /* GoalEvaluator_old.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalEvaluator_old.swift; sourceTree = "<group>"; };
 		FD47E62A2FBF50F100039A6B /* SessionInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionInterval.swift; sourceTree = "<group>"; };
+		FD47E62C2FBF897900039A6B /* TimeCalculator_old.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCalculator_old.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 			children = (
 				FD35775D2FB66743004F169D /* DataContainer.swift */,
 				FD35776F2FB67945004F169D /* TimeCalculator.swift */,
+				FD47E62C2FBF897900039A6B /* TimeCalculator_old.swift */,
 				FD3577A82FB74D61004F169D /* StreakCalculator.swift */,
 				FD3577AE2FB7561F004F169D /* GoalEvaluator.swift */,
 				FD47E5AF2FBE00B900039A6B /* GoalEvaluator_old.swift */,
@@ -288,6 +291,7 @@
 				FD35775C2FB665B5004F169D /* Goal.swift in Sources */,
 				FD3577AF2FB7561F004F169D /* GoalEvaluator.swift in Sources */,
 				FD3577422FB65CB7004F169D /* ContentView.swift in Sources */,
+				FD47E62D2FBF897900039A6B /* TimeCalculator_old.swift in Sources */,
 				FD3577B82FB76CDD004F169D /* TopicListView.swift in Sources */,
 				FD3577A92FB74D61004F169D /* StreakCalculator.swift in Sources */,
 				FD3577702FB67945004F169D /* TimeCalculator.swift in Sources */,
