@@ -28,6 +28,7 @@
 		FD3577BC2FB7741C004F169D /* TimerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3577BB2FB7741C004F169D /* TimerScreen.swift */; };
 		FD3577BE2FB775A3004F169D /* TopicTimesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3577BD2FB775A3004F169D /* TopicTimesScreen.swift */; };
 		FD47E5B02FBE00B900039A6B /* GoalEvaluator_old.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD47E5AF2FBE00B900039A6B /* GoalEvaluator_old.swift */; };
+		FD47E62B2FBF50F100039A6B /* SessionInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD47E62A2FBF50F100039A6B /* SessionInterval.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		FD3577BB2FB7741C004F169D /* TimerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerScreen.swift; sourceTree = "<group>"; };
 		FD3577BD2FB775A3004F169D /* TopicTimesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicTimesScreen.swift; sourceTree = "<group>"; };
 		FD47E5AF2FBE00B900039A6B /* GoalEvaluator_old.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalEvaluator_old.swift; sourceTree = "<group>"; };
+		FD47E62A2FBF50F100039A6B /* SessionInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionInterval.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 			children = (
 				FD3577572FB665B3004F169D /* Topic.swift */,
 				FD3577592FB665B3004F169D /* StudySession.swift */,
+				FD47E62A2FBF50F100039A6B /* SessionInterval.swift */,
 				FD35775B2FB665B5004F169D /* Goal.swift */,
 			);
 			path = Models;
@@ -154,8 +157,8 @@
 			isa = PBXGroup;
 			children = (
 				FD35776C2FB676A0004F169D /* Goals_PlayingTests.swift */,
-				FD3577AA2FB74DE8004F169D /* StreakCalculatorTests.swift */,
 				FD3577AC2FB74E8E004F169D /* TimeCalculatorTests.swift */,
+				FD3577AA2FB74DE8004F169D /* StreakCalculatorTests.swift */,
 				FD3577B02FB75A0B004F169D /* GoalEvaluatorTests.swift */,
 			);
 			path = Goals_PlayingTests;
@@ -281,6 +284,7 @@
 				FD3577B42FB76656004F169D /* Timer.swift in Sources */,
 				FD47E5B02FBE00B900039A6B /* GoalEvaluator_old.swift in Sources */,
 				FD3577B62FB76CDC004F169D /* TopicEntryView.swift in Sources */,
+				FD47E62B2FBF50F100039A6B /* SessionInterval.swift in Sources */,
 				FD35775C2FB665B5004F169D /* Goal.swift in Sources */,
 				FD3577AF2FB7561F004F169D /* GoalEvaluator.swift in Sources */,
 				FD3577422FB65CB7004F169D /* ContentView.swift in Sources */,
