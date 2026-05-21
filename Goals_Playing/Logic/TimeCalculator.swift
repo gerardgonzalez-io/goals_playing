@@ -11,7 +11,6 @@ import Foundation
 ///
 /// Methods are static because calculations only depend on input parameters.
 /// Use `TimeCalculator.dailyTime(...)` instead of creating `TimeCalculator()`.
-/// If this type later needs injected dependencies or state, instance methods would be more appropriate.
 struct TimeCalculator
 {
     /*
