@@ -9,8 +9,6 @@ import Foundation
 ///   crossing midnight are automatically split across days.
 /// - `totalTime` sums the full duration of all intervals across all sessions.
 ///
-/// Methods are static because calculations only depend on input parameters.
-/// Use `TimeCalculator.dailyTime(...)` instead of creating `TimeCalculator()`.
 struct TimeCalculator
 {
     /*

@@ -30,6 +30,7 @@
 		FD47E5B02FBE00B900039A6B /* GoalEvaluator_old.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD47E5AF2FBE00B900039A6B /* GoalEvaluator_old.swift */; };
 		FD47E62B2FBF50F100039A6B /* SessionInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD47E62A2FBF50F100039A6B /* SessionInterval.swift */; };
 		FD47E62D2FBF897900039A6B /* TimeCalculator_old.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD47E62C2FBF897900039A6B /* TimeCalculator_old.swift */; };
+		FD47E6302FBFA54D00039A6B /* StreakCalculator_old.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD47E62F2FBFA54D00039A6B /* StreakCalculator_old.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,8 @@
 		FD47E5AF2FBE00B900039A6B /* GoalEvaluator_old.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalEvaluator_old.swift; sourceTree = "<group>"; };
 		FD47E62A2FBF50F100039A6B /* SessionInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionInterval.swift; sourceTree = "<group>"; };
 		FD47E62C2FBF897900039A6B /* TimeCalculator_old.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCalculator_old.swift; sourceTree = "<group>"; };
+		FD47E62E2FBF9C3F00039A6B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		FD47E62F2FBFA54D00039A6B /* StreakCalculator_old.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakCalculator_old.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +94,7 @@
 		FD3577262FB65C78004F169D = {
 			isa = PBXGroup;
 			children = (
+				FD47E62E2FBF9C3F00039A6B /* README.md */,
 				FD3577402FB65CB7004F169D /* Goals_Playing */,
 				FD35776D2FB676A0004F169D /* Goals_PlayingTests */,
 				FD3577302FB65C78004F169D /* Products */,
@@ -138,6 +142,7 @@
 				FD35776F2FB67945004F169D /* TimeCalculator.swift */,
 				FD47E62C2FBF897900039A6B /* TimeCalculator_old.swift */,
 				FD3577A82FB74D61004F169D /* StreakCalculator.swift */,
+				FD47E62F2FBFA54D00039A6B /* StreakCalculator_old.swift */,
 				FD3577AE2FB7561F004F169D /* GoalEvaluator.swift */,
 				FD47E5AF2FBE00B900039A6B /* GoalEvaluator_old.swift */,
 			);
@@ -282,6 +287,7 @@
 				FD3577BE2FB775A3004F169D /* TopicTimesScreen.swift in Sources */,
 				FD3577412FB65CB7004F169D /* Goals_PlayingApp.swift in Sources */,
 				FD3577582FB665B3004F169D /* Topic.swift in Sources */,
+				FD47E6302FBFA54D00039A6B /* StreakCalculator_old.swift in Sources */,
 				FD3577BA2FB770D6004F169D /* TopicDetailView.swift in Sources */,
 				FD35775A2FB665B3004F169D /* StudySession.swift in Sources */,
 				FD3577B42FB76656004F169D /* Timer.swift in Sources */,

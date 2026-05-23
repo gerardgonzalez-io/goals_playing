@@ -2,7 +2,7 @@ import Foundation
 import Testing
 @testable import Goals_Playing
 
-/// `TimeCalculatorTests` coverage summary (7 tests):
+/// `TimeCalculatorTests` coverage summary (8 tests):
 /// 1. `dailyTimeSplitsCrossDaySingleIntervalSession`:
 ///    Verifies one 1-hour interval crossing midnight is split correctly into both days.
 ///    interval 1 = 23:30 -> 00:30 (1h, crossing interval), resulting in 30m + 30m by day.
@@ -45,6 +45,10 @@ import Testing
 ///    interval 5 = 23:53 -> 00:23 (30m, crossing interval),
 ///    interval 6 = 00:40 -> 00:55 (15m, same day),
 ///    resulting in 3h45m total.
+/// 8. `measureTotalTimeExecutionTime`:
+///    Measures total-time performance with 20,500 sessions.
+///    Each session has 4 same-day intervals:
+///    interval 1 = 25m, interval 2 = 20m, interval 3 = 15m, interval 4 = 20m.
 struct TimeCalculatorTests
 {
     @Test("Cross-day session is split across both calendar days")

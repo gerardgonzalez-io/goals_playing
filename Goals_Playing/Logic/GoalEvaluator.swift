@@ -1,40 +1,54 @@
 import Foundation
 
-/*
- ◇ Test "Measure reachedGoalsByDay execution time" started.
- 
- reachedGoalsByDay took: 0.036813667 seconds
-
- ✔ Test "Measure reachedGoalsByDay execution time" passed after 0.048 seconds.
- ✔ Suite GoalEvaluatorTests passed after 0.049 seconds.
- ✔ Test run with 1 test in 1 suite passed after 0.050 seconds.
- */
+/// Evaluates daily goal completion using interval-based study time and timestamp-level goal activation.
+///
+/// Behavior:
+/// - Study time is computed from `SessionInterval` overlap per day.
+/// - Goal activation is resolved with hour/minute precision (`goal.createdAt`), not only by calendar day.
+/// - For each day, the active goal is the latest goal created at or before that day's first study timestamp.
+/// - Result keys remain `startOfDay` dates for studied days only.
+///
 struct GoalEvaluator {
     let calendar = Calendar.current
 
+    /*
+     ◇ Test "Measure reachedGoalsByDay execution time" started.
+     
+     reachedGoalsByDay took: 0.036813667 seconds
+
+     ✔ Test "Measure reachedGoalsByDay execution time" passed after 0.048 seconds.
+     ✔ Suite GoalEvaluatorTests passed after 0.049 seconds.
+     ✔ Test run with 1 test in 1 suite passed after 0.050 seconds.
+     */
+
     func reachedGoalsByDay(sessions: [StudySession], goals: [Goal]) -> [Date: Bool]
     {
-        let completedByDay = completedSecondsByDay(from: sessions)
+        let (completedByDay, firstStudyTimestampByDay) = completedSecondsByDay(from: sessions)
         let days = completedByDay.keys.sorted()
 
         guard !days.isEmpty else {
             return [:]
         }
 
-        let effectiveGoals = effectiveGoalsByDay(from: goals)
+        let goalsByCreatedAt = goals.sorted { $0.createdAt < $1.createdAt }
 
         var result: [Date: Bool] = [:]
         result.reserveCapacity(days.count)
 
         var activeGoal: Goal?
         var goalIndex = 0
-        let goalDays = effectiveGoals.keys.sorted()
 
         for day in days
         {
-            while goalIndex < goalDays.count, goalDays[goalIndex] <= day
+            guard let firstStudyTimestamp = firstStudyTimestampByDay[day] else
             {
-                activeGoal = effectiveGoals[goalDays[goalIndex]]
+                result[day] = false
+                continue
+            }
+
+            while goalIndex < goalsByCreatedAt.count, goalsByCreatedAt[goalIndex].createdAt <= firstStudyTimestamp
+            {
+                activeGoal = goalsByCreatedAt[goalIndex]
                 goalIndex += 1
             }
 
@@ -50,63 +64,53 @@ struct GoalEvaluator {
         return result
     }
 
-    private func completedSecondsByDay(from sessions: [StudySession]) -> [Date: TimeInterval]
+    private func completedSecondsByDay(from sessions: [StudySession]) -> ([Date: TimeInterval], [Date: Date])
     {
         var totals: [Date: TimeInterval] = [:]
+        var firstStudyTimestampByDay: [Date: Date] = [:]
 
-        for session in sessions where session.startDate < session.endDate
+        for session in sessions
         {
-            var currentDay = calendar.startOfDay(for: session.startDate)
-
-            while currentDay < session.endDate
+            for interval in session.sessionIntervals where interval.startDate < interval.endDate
             {
-                guard let dayInterval = calendar.dateInterval(of: .day, for: currentDay) else
+                var currentDay = calendar.startOfDay(for: interval.startDate)
+
+                while currentDay < interval.endDate
                 {
-                    break
+                    guard let dayInterval = calendar.dateInterval(of: .day, for: currentDay) else
+                    {
+                        break
+                    }
+
+                    let overlapStart = max(interval.startDate, dayInterval.start)
+                    let overlapEnd = min(interval.endDate, dayInterval.end)
+
+                    if overlapStart < overlapEnd
+                    {
+                        totals[currentDay, default: 0] += overlapEnd.timeIntervalSince(overlapStart)
+                        if let existing = firstStudyTimestampByDay[currentDay]
+                        {
+                            if overlapStart < existing
+                            {
+                                firstStudyTimestampByDay[currentDay] = overlapStart
+                            }
+                        }
+                        else
+                        {
+                            firstStudyTimestampByDay[currentDay] = overlapStart
+                        }
+                    }
+
+                    guard let nextDay = calendar.date(byAdding: .day, value: 1, to: currentDay) else
+                    {
+                        break
+                    }
+
+                    currentDay = nextDay
                 }
-
-                let overlapStart = max(session.startDate, dayInterval.start)
-                let overlapEnd = min(session.endDate, dayInterval.end)
-
-                if overlapStart < overlapEnd
-                {
-                    totals[currentDay, default: 0] += overlapEnd.timeIntervalSince(overlapStart)
-                }
-
-                guard let nextDay = calendar.date(byAdding: .day, value: 1, to: currentDay) else
-                {
-                    break
-                }
-
-                currentDay = nextDay
             }
         }
 
-        return totals
-    }
-
-    private func effectiveGoalsByDay(from goals: [Goal]) -> [Date: Goal]
-    {
-        var effectiveGoals: [Date: Goal] = [:]
-
-        for goal in goals
-        {
-            let day = calendar.startOfDay(for: goal.createdAt)
-
-            if let existing = effectiveGoals[day]
-            {
-                if goal.createdAt > existing.createdAt
-                {
-                    effectiveGoals[day] = goal
-                }
-            }
-            else
-            {
-                effectiveGoals[day] = goal
-            }
-        }
-
-        return effectiveGoals
+        return (totals, firstStudyTimestampByDay)
     }
 }
-// One small behavior note: this keeps your existing logic where only days covered by sessions appear in the result. Days with goals but no sessions are still not included.
