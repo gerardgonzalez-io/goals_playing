@@ -29,6 +29,7 @@ struct StreakCalculatorTests
         Input(expectedStreak: 3, days: [-3, -2, -1]),
         Input(expectedStreak: 2, days: [-4, -2, -1])
     ])
+
     func testCalculations(input: Input)
     {
         let sessions = input.days.map {
@@ -37,7 +38,10 @@ struct StreakCalculatorTests
             return StudySession(
                 topicID: UUID(),
                 startDate: startDate,
-                endDate: endDate
+                endDate: endDate,
+                sessionIntervals: [
+                    SessionInterval(startDate: startDate, endDate: endDate)
+                ]
             )
         }
 
@@ -45,3 +49,59 @@ struct StreakCalculatorTests
         #expect(streak == input.expectedStreak, "\(input.days)")
     }
 }
+
+extension StreakCalculatorTests
+{
+    @Test("Measure calculateStreak execution time")
+    func measureCalculateStreakExecutionTime()
+    {
+        let calendar = Calendar(identifier: .gregorian)
+        let topicID = UUID()
+
+        let sessions = (0..<1_500).map { i in
+            let startDate = calendar.date(
+                byAdding: .day,
+                value: i,
+                to: date(year: 2000, month: 1, day: 1, calendar: calendar)
+            )!
+
+            let endDate = startDate.addingTimeInterval(3_900)
+
+            return StudySession(
+                topicID: topicID,
+                startDate: startDate,
+                endDate: endDate,
+                sessionIntervals: [
+                    SessionInterval(startDate: startDate, endDate: endDate)
+                ]
+            )
+        }
+
+        let clock = ContinuousClock()
+
+        let duration = clock.measure {
+            _ = streakCalculator.calculateStreak(for: sessions)
+        }
+
+        print("calculateStreak took:", duration)
+    }
+
+    private func date(
+        year: Int,
+        month: Int,
+        day: Int,
+        hour: Int = 0,
+        minute: Int = 0,
+        calendar: Calendar
+    ) -> Date
+    {
+        calendar.date(from: DateComponents(
+            year: year,
+            month: month,
+            day: day,
+            hour: hour,
+            minute: minute
+        ))!
+    }
+}
+
