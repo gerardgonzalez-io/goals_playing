@@ -2,6 +2,15 @@ import Foundation
 import Testing
 @testable import Goals_Playing
 
+/// `StreakCalculatorTests` coverage summary (2 tests):
+/// 1. `testCalculations`:
+///    Verifies streak results across multiple day-pattern scenarios using parameterized inputs.
+///    Covered behaviors include:
+///    empty input, activity today, activity yesterday, inactive streak after gaps,
+///    duplicate same-day sessions counting as one streak day, and multi-day consecutive streak counting.
+/// 2. `measureCalculateStreakExecutionTime`:
+///    Measures execution time of `calculateStreak(for:)` with a large synthetic dataset
+///    to monitor performance characteristics under heavier load.
 struct StreakCalculatorTests
 {
     let streakCalculator = StreakCalculator()
@@ -104,4 +113,3 @@ extension StreakCalculatorTests
         ))!
     }
 }
-

@@ -3,11 +3,24 @@ import Foundation
 
 /// Utility for calculating study streaks from session intervals (real active study time).
 ///
-/// Global behavior:
-/// - A `StudySession` can contain multiple `SessionInterval` values to represent pause/resume cycles.
-/// - Streak days are calculated from interval activity, not from session outer start/end dates.
-/// - If an interval crosses midnight, its duration contributes activity to each overlapped day.
+/// Streak rules:
 /// - A day counts toward the streak when at least one interval overlaps that day.
+/// - The streak is still active if the user studied yesterday (even if not today).
+/// - The streak breaks after one full missed day between successful days.
+///
+/// How it works:
+/// - Input: `[StudySession]`, where each session can contain multiple `SessionInterval` values.
+/// - Intervals are the source of truth; session outer `startDate`/`endDate` do not define successful days.
+/// - If an interval crosses midnight, activity is split across each overlapped calendar day.
+/// - Output: `Int` representing the current consecutive-day streak up to today.
+///
+/// Examples:
+/// - Activity only today -> streak `1`.
+/// - No activity today, but activity yesterday -> streak `1`.
+/// - Activity on today and yesterday -> streak `2`.
+/// - Activity on today and two days ago, but not yesterday -> streak `1` (gap breaks streak).
+/// - Activity on yesterday and two days ago, but not today -> streak `2` (active from yesterday).
+///
  struct StreakCalculator
  {
      let calendar = Calendar.current
@@ -52,12 +65,16 @@ import Foundation
              }
          }
 
-         let daysAgoArray = successfulDays
-             .sorted(by: >)
-             .map { calendar.dateComponents([.day], from: $0, to: endOfToday) }
-             .compactMap { $0.day }
+        let daysAgoArray = successfulDays
+            .sorted(by: >)
+            .map { calendar.dateComponents([.day], from: $0, to: endOfToday) }
+            .compactMap { $0.day }
+        // `daysAgoArray` stores successful days as offsets from today:
+        // `0` = today, `1` = yesterday, `2` = two days ago, etc.
+        // Example: [-2, -1, 0] input activity days become [0, 1, 2] after mapping.
+        // We count consecutive values from 0 or 1 to keep streak active through yesterday.
 
-         var streak = 0
+        var streak = 0
          for daysAgo in daysAgoArray
          {
              if daysAgo == streak
