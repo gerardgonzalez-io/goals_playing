@@ -2,7 +2,7 @@
 
 ## Features
 1. Show a timer.
-2. Set a general goal.
+2. Set a goals per topic.
 3. Show current streak.
 4. Show daily and total study time.
 

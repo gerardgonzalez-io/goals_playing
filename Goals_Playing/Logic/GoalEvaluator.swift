@@ -20,7 +20,6 @@ struct GoalEvaluator {
      ✔ Suite GoalEvaluatorTests passed after 0.049 seconds.
      ✔ Test run with 1 test in 1 suite passed after 0.050 seconds.
      */
-
     func reachedGoalsByDay(sessions: [StudySession], goals: [Goal]) -> [Date: Bool]
     {
         let (completedByDay, firstStudyTimestampByDay) = completedSecondsByDay(from: sessions)
