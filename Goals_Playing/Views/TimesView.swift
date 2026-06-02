@@ -1,7 +1,7 @@
 import SwiftData
 import SwiftUI
 
-struct TopicTimesScreen: View
+struct TimesView: View
 {
     @Query private var allSessions: [StudySession]
 
@@ -85,8 +85,9 @@ struct TopicTimesScreen: View
 
 #Preview
 {
-    NavigationStack {
-        TopicTimesScreen(topicID: UUID(), topicName: "Mathematics")
+    NavigationStack
+    {
+        TimesView(topicID: UUID(), topicName: "Mathematics")
     }
     .modelContainer(for: [StudySession.self], inMemory: true)
 }

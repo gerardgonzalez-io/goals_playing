@@ -7,19 +7,23 @@ final class StudySession
     var id: UUID
     var topicID: UUID
     var startDate: Date
-    var endDate: Date
+    var endDate: Date?
+    
+    @Relationship(deleteRule: .cascade)
     var sessionIntervals: [SessionInterval]
 
     var durationSeconds: TimeInterval
     {
-        endDate.timeIntervalSince(startDate)
+        guard let endDate else { return 0 }
+        let duration = endDate.timeIntervalSince(startDate)
+        return max(0, duration)
     }
 
     init(
         id: UUID = UUID(),
         topicID: UUID,
         startDate: Date,
-        endDate: Date,
+        endDate: Date? = nil,
         sessionIntervals: [SessionInterval] = []
     )
     {

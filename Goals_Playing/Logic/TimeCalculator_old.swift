@@ -37,7 +37,7 @@ struct TimeCalculatorOld
         return studySessions.reduce(0) { total, session in
             let intervalsTotal = session.sessionIntervals.reduce(0) { intervalTotal, interval in
                 let overlapStart = max(interval.startDate, dayInterval.start)
-                let overlapEnd = min(interval.endDate, dayInterval.end)
+                let overlapEnd = min(interval.endDate!, dayInterval.end)
 
                 guard overlapStart < overlapEnd else {
                     return intervalTotal

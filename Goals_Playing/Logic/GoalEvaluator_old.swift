@@ -47,7 +47,7 @@ struct GoalEvaluatorOld
 
         return sessions.reduce(0) { total, session in
             let overlapStart = max(session.startDate, dayInterval.start)
-            let overlapEnd = min(session.endDate, dayInterval.end)
+            let overlapEnd = min(session.endDate ?? Date.now, dayInterval.end)
 
             guard overlapStart < overlapEnd else {
                 return total
@@ -61,10 +61,10 @@ struct GoalEvaluatorOld
     {
         var days = Set<Date>()
 
-        for session in sessions where session.startDate < session.endDate {
+        for session in sessions where session.startDate < session.endDate ?? Date.now {
             var currentDay = calendar.startOfDay(for: session.startDate)
 
-            while currentDay < session.endDate {
+            while currentDay < session.endDate ?? Date.now {
                 days.insert(currentDay)
                 guard let nextDay = calendar.date(byAdding: .day, value: 1, to: currentDay) else {
                     break

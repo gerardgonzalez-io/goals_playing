@@ -11,18 +11,35 @@ struct ContentView: View
 {
     var body: some View
     {
-        VStack
+        NavigationStack
         {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            List
+            {
+                ForEach(NavigationOptions.mainPages)
+                { page in
+                    NavigationLink(value: page)
+                    {
+                        Label(page.name, systemImage: page.symbolName)
+                    }
+                }
+            }
+            .navigationTitle("Goals")
+            .navigationDestination(for: NavigationOptions.self)
+            { page in
+                switch page
+                {
+                case .topics:
+                    TopicListView()
+                case .achievements:
+                    EmptyView()
+                }
+            }
         }
-        .padding()
     }
 }
 
 #Preview
 {
     ContentView()
+        .sampleDataContainer()
 }

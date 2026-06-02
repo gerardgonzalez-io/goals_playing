@@ -40,7 +40,7 @@ import Foundation
          {
              for interval in session.sessionIntervals
              {
-                 guard interval.startDate < interval.endDate else
+                 guard interval.startDate < interval.endDate! else
                  {
                      continue
                  }
@@ -48,7 +48,7 @@ import Foundation
                  let firstDay = calendar.startOfDay(for: interval.startDate)
 
                  // Treat interval end as exclusive so boundaries at 00:00 do not count the next day.
-                 let inclusiveEnd = interval.endDate.addingTimeInterval(-TimeInterval.leastNonzeroMagnitude)
+                 let inclusiveEnd = interval.endDate!.addingTimeInterval(-TimeInterval.leastNonzeroMagnitude)
                  guard inclusiveEnd >= interval.startDate else
                  {
                      continue

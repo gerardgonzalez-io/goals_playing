@@ -38,14 +38,16 @@ struct TopicDetailView: View
         }
         .navigationTitle(topicName)
         .navigationBarTitleDisplayMode(.inline)
-        .navigationDestination(for: TopicDetailRoute.self) { route in
-            switch route {
+        .navigationDestination(for: TopicDetailRoute.self)
+        { route in
+            switch route
+            {
             case .timerView:
-                TimerScreen(topicID: topicID, topicName: topicName)
+                TimerView(topicID: topicID, topicName: topicName)
             case .streakView:
-                TopicStreakScreen(topicName: topicName)
+                StreakView(topicID: topicID, topicName: topicName)
             case .timesView:
-                TopicTimesScreen(topicID: topicID, topicName: topicName)
+                TimesView(topicID: topicID, topicName: topicName)
             }
         }
     }
@@ -79,20 +81,10 @@ private enum TopicDetailRoute: Hashable
     case timesView
 }
 
-private struct TopicStreakScreen: View
-{
-    let topicName: String
-
-    var body: some View
-    {
-        Text("Streak screen for \(topicName)")
-            .navigationTitle("Streak")
-    }
-}
-
 #Preview
 {
-    NavigationStack {
+    NavigationStack
+    {
         TopicDetailView(topicID: UUID(), topicName: "Mathematics")
     }
 }

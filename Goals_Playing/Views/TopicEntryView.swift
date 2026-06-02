@@ -27,43 +27,40 @@ struct TopicEntryView: View
 
     var body: some View
     {
-        NavigationStack
+        Form
         {
-            Form
+            Section("Topic")
             {
-                Section("Topic")
-                {
-                    TextField("Topic name", text: $topicName)
-                        .textInputAutocapitalization(.words)
+                TextField("Topic name", text: $topicName)
+                    .textInputAutocapitalization(.words)
 
-                    if isDuplicateName {
-                        Text("A topic with this name already exists.")
-                            .font(.footnote)
-                            .foregroundStyle(.red)
-                    }
-                }
-            }
-            .navigationTitle("New Topic")
-            .toolbar
-            {
-                ToolbarItem(placement: .topBarLeading)
-                {
-                    Button("Cancel")
-                    {
-                        dismiss()
-                    }
-                }
-
-                ToolbarItem(placement: .topBarTrailing)
-                {
-                    Button("Save")
-                    {
-                        saveTopic()
-                    }
-                    .disabled(!canSave)
+                if isDuplicateName {
+                    Text("A topic with this name already exists.")
+                        .font(.footnote)
+                        .foregroundStyle(.red)
                 }
             }
         }
+        .toolbar
+        {
+            ToolbarItem(placement: .topBarLeading)
+            {
+                Button("Cancel")
+                {
+                    dismiss()
+                }
+            }
+
+            ToolbarItem(placement: .topBarTrailing)
+            {
+                Button("Save")
+                {
+                    saveTopic()
+                }
+                .disabled(!canSave)
+            }
+        }
+
     }
 
     private func saveTopic()
@@ -76,6 +73,9 @@ struct TopicEntryView: View
 
 #Preview
 {
-    TopicEntryView(existingNames: ["math", "history"])
-        .modelContainer(for: [Topic.self], inMemory: true)
+    NavigationStack
+    {
+        TopicEntryView(existingNames: ["math", "history"])
+            .modelContainer(for: [Topic.self], inMemory: true)
+    }
 }

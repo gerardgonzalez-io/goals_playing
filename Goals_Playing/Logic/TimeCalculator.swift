@@ -19,8 +19,10 @@ struct TimeCalculator
         from studySessions: [StudySession],
         on date: Date = .now,
         calendar: Calendar = .current
-    ) -> TimeInterval {
-        guard let dayInterval = calendar.dateInterval(of: .day, for: date) else {
+    ) -> TimeInterval
+    {
+        guard let dayInterval = calendar.dateInterval(of: .day, for: date) else
+        {
             return 0
         }
 
@@ -34,7 +36,8 @@ struct TimeCalculator
             for interval in session.sessionIntervals
             {
                 let overlapStart = max(interval.startDate, dayStart)
-                let overlapEnd = min(interval.endDate, dayEnd)
+                // End dates always have to exists
+                let overlapEnd = min(interval.endDate!, dayEnd)
 
                 if overlapStart < overlapEnd {
                     total += overlapEnd.timeIntervalSince(overlapStart)

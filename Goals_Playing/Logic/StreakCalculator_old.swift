@@ -21,7 +21,7 @@ struct StreakCalculatorOld
 
         let daysAgoArray = sessions
             .reversed()
-            .map(\.endDate)
+            .map(\.endDate!)
             .map { calendar.dateComponents([.day], from: $0, to: endOfToday) }
             .compactMap { $0.day }
 
