@@ -24,6 +24,16 @@ struct TimerView: View
         timer.isRunning
     }
 
+    private var primaryButtonTitle: String
+    {
+        if currentSession == nil
+        {
+            return "Start"
+        }
+
+        return isRunning ? "Pause" : "Resume"
+    }
+
     var body: some View
     {
         VStack(spacing: 20)
@@ -38,36 +48,9 @@ struct TimerView: View
 
             HStack(spacing: 12)
             {
-                Button("Start")
+                Button(primaryButtonTitle)
                 {
-                    do
-                    {
-                        try startSession()
-                    }
-                    catch
-                    {}
-                }
-                .buttonStyle(.bordered)
-
-                Button("Pause")
-                {
-                    do
-                    {
-                        try pauseSession()
-                    }
-                    catch
-                    {}
-                }
-                .buttonStyle(.bordered)
-
-                Button("Resume")
-                {
-                    do
-                    {
-                        try resumeSession()
-                    }
-                    catch
-                    {}
+                    performPrimaryTimerAction()
                 }
                 .buttonStyle(.bordered)
 
@@ -81,7 +64,7 @@ struct TimerView: View
                     {}
                 }
                 .buttonStyle(.bordered)
-                .disabled(!isRunning && timer.secondsElapsed == 0)
+                .disabled(currentSession == nil)
             }
             
             Spacer()
@@ -196,7 +179,7 @@ struct TimerView: View
         currentSession = nil
         currentInterval = nil
         
-        timer.stop()
+        timer.reset()
     }
 
     private func resumeSession() throws
@@ -242,6 +225,27 @@ struct TimerView: View
         timer.stop()
         
         currentInterval = nil
+    }
+
+    private func performPrimaryTimerAction()
+    {
+        do
+        {
+            if currentSession == nil
+            {
+                try startSession()
+            }
+            else if isRunning
+            {
+                try pauseSession()
+            }
+            else
+            {
+                try resumeSession()
+            }
+        }
+        catch
+        {}
     }
 
     private func formattedTime(_ seconds: TimeInterval) -> String
