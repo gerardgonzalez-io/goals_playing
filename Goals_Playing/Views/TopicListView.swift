@@ -3,7 +3,12 @@ import SwiftUI
 
 struct TopicListView: View
 {
+    @Environment(\.modelContext) private var modelContext
+
     @Query(sort: \Topic.name) private var topics: [Topic]
+    @Query private var allSessions: [StudySession]
+    @Query private var allGoals: [Goal]
+
     @State private var isPresentingEntry = false
 
     private var existingNames: Set<String>
@@ -14,22 +19,22 @@ struct TopicListView: View
         })
     }
 
-    var body: some View
+    @ViewBuilder
+    private var content: some View
     {
-        // Check if you really need this Group structure here!!!
-        Group
+        if topics.isEmpty
         {
-            if topics.isEmpty
+            ContentUnavailableView(
+                "No Topics Yet",
+                systemImage: "list.bullet.clipboard",
+                description: Text("Tap + to create your first study topic.")
+            )
+        }
+        else
+        {
+            List
             {
-                ContentUnavailableView(
-                    "No Topics Yet",
-                    systemImage: "list.bullet.clipboard",
-                    description: Text("Tap + to create your first study topic.")
-                )
-            }
-            else
-            {
-                List(topics)
+                ForEach(topics)
                 { topic in
                     NavigationLink(value: TopicRoute(topicID: topic.id, topicName: topic.name))
                     {
@@ -38,9 +43,25 @@ struct TopicListView: View
                             Text(topic.name)
                         }
                     }
+                    .swipeActions
+                    {
+                        Button(role: .destructive)
+                        {
+                            deleteTopic(topic)
+                        }
+                        label:
+                        {
+                            Label("Delete", systemImage: "trash")
+                        }
+                    }
                 }
             }
         }
+    }
+
+    var body: some View
+    {
+        content
         .navigationTitle("Topics")
         .toolbar
         {
@@ -70,6 +91,30 @@ struct TopicListView: View
             TopicDetailView(topicID: route.topicID,
                             topicName: route.topicName)
         }
+    }
+
+    private func deleteTopic(_ topic: Topic)
+    {
+        let topicID = topic.id
+
+        for goal in allGoals where goal.topicID == topicID
+        {
+            modelContext.delete(goal)
+        }
+
+        for session in allSessions where session.topicID == topicID
+        {
+            modelContext.delete(session)
+        }
+
+        modelContext.delete(topic)
+
+        do
+        {
+            try modelContext.save()
+        }
+        catch
+        {}
     }
 }
 
