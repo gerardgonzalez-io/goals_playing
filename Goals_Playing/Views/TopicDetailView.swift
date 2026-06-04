@@ -44,6 +44,15 @@ struct TopicDetailView: View
                     symbol: "calendar"
                 )
             }
+            
+            NavigationLink(value: TopicDetailRoute.goalView)
+            {
+                topicCard(
+                    title: "Change goal",
+                    subtitle: "Change the goal of your topic.",
+                    symbol: "target"
+                )
+            }
         }
         .navigationTitle(topicName)
         .navigationBarTitleDisplayMode(.inline)
@@ -59,6 +68,8 @@ struct TopicDetailView: View
                 TimesView(topicID: topicID, topicName: topicName)
             case .calendarView:
                 CalendarView(topicID: topicID, topicName: topicName)
+            case .goalView:
+                GoalView(topicID: topicID, topicName: topicName)
             }
         }
     }
@@ -91,6 +102,7 @@ private enum TopicDetailRoute: Hashable
     case streakView
     case timesView
     case calendarView
+    case goalView
 }
 
 #Preview

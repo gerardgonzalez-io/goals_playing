@@ -66,8 +66,24 @@ struct TopicEntryView: View
     private func saveTopic()
     {
         guard canSave else { return }
-        modelContext.insert(Topic(name: trimmedName))
-        dismiss()
+
+        let now = Date.now
+        let topic = Topic(name: trimmedName)
+        let goal = Goal(
+            topicID: topic.id,
+            targetSecondsPerDay: 3_600,
+            createdAt: now
+        )
+
+        do
+        {
+            modelContext.insert(topic)
+            modelContext.insert(goal)
+            try modelContext.save()
+            dismiss()
+        }
+        catch
+        {}
     }
 }
 
@@ -76,6 +92,6 @@ struct TopicEntryView: View
     NavigationStack
     {
         TopicEntryView(existingNames: ["math", "history"])
-            .modelContainer(for: [Topic.self], inMemory: true)
+            .modelContainer(for: [Topic.self, Goal.self], inMemory: true)
     }
 }

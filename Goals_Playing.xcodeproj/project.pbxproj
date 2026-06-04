@@ -33,6 +33,7 @@
 		FD47E6302FBFA54D00039A6B /* StreakCalculator_old.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD47E62F2FBFA54D00039A6B /* StreakCalculator_old.swift */; };
 		FD6035222FC4DDFF0030E0F6 /* NavigationOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6035212FC4DDFF0030E0F6 /* NavigationOptions.swift */; };
 		FDF5E79A2FD1EA3600CB662C /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF5E7992FD1EA3600CB662C /* CalendarView.swift */; };
+		FDF5E79C2FD1F7C600CB662C /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF5E79B2FD1F7C600CB662C /* GoalView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		FD47E62F2FBFA54D00039A6B /* StreakCalculator_old.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakCalculator_old.swift; sourceTree = "<group>"; };
 		FD6035212FC4DDFF0030E0F6 /* NavigationOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationOptions.swift; sourceTree = "<group>"; };
 		FDF5E7992FD1EA3600CB662C /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		FDF5E79B2FD1F7C600CB662C /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +166,7 @@
 				FD3577BD2FB775A3004F169D /* TimesView.swift */,
 				FD03C5242FCDD2EB00EA1718 /* StreakView.swift */,
 				FDF5E7992FD1EA3600CB662C /* CalendarView.swift */,
+				FDF5E79B2FD1F7C600CB662C /* GoalView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				FD03C5252FCDD2EB00EA1718 /* StreakView.swift in Sources */,
 				FD3577702FB67945004F169D /* TimeCalculator.swift in Sources */,
 				FD35775E2FB66743004F169D /* DataContainer.swift in Sources */,
+				FDF5E79C2FD1F7C600CB662C /* GoalView.swift in Sources */,
 				FD3577BC2FB7741C004F169D /* TimerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
