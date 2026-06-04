@@ -4,6 +4,17 @@ import SwiftUI
 struct TimerView: View
 {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.scenePhase) private var scenePhase
+
+    private enum UserDefaultsKeys
+    {
+        static let launchID = "launchID"
+        static let sessionID = "sessionID"
+        static let lastSeenLaunchID = "lastSeenLaunchID"
+        static let timerSnapshotSeconds = "timerSnapshotSeconds"
+        static let timerSnapshotDate = "timerSnapshotDate"
+        static let timerSnapshotWasRunning = "timerSnapshotWasRunning"
+    }
 
     let topicID: UUID
     let topicName: String
@@ -88,6 +99,18 @@ struct TimerView: View
             }
             catch
             {}
+        }
+        .onChange(of: scenePhase)
+        { _, newScenePhase in
+            if newScenePhase == .active
+            {
+                recoverTimerSnapshotIfNeeded()
+            }
+            else
+            {
+                saveCurrentSessionIDInUserDefaults()
+                saveTimerSnapshotInUserDefaults()
+            }
         }
     }
 
@@ -175,6 +198,7 @@ struct TimerView: View
         }
 
         try modelContext.save()
+        deleteSessionIDFromUserDefaults()
 
         currentSession = nil
         currentInterval = nil
@@ -225,6 +249,84 @@ struct TimerView: View
         timer.stop()
         
         currentInterval = nil
+    }
+
+    private func saveCurrentSessionIDInUserDefaults()
+    {
+        guard let currentSession
+        else
+        {
+            return
+        }
+
+        UserDefaults.standard.set(currentSession.id.uuidString, forKey: UserDefaultsKeys.sessionID)
+    }
+
+    private func deleteSessionIDFromUserDefaults()
+    {
+        UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.sessionID)
+        deleteTimerSnapshotFromUserDefaults()
+    }
+
+    private func saveTimerSnapshotInUserDefaults()
+    {
+        guard currentSession != nil
+        else
+        {
+            return
+        }
+
+        let defaults = UserDefaults.standard
+
+        if let launchID = defaults.string(forKey: UserDefaultsKeys.launchID)
+        {
+            defaults.set(launchID, forKey: UserDefaultsKeys.lastSeenLaunchID)
+        }
+
+        defaults.set(timer.secondsElapsed, forKey: UserDefaultsKeys.timerSnapshotSeconds)
+        defaults.set(Date.now, forKey: UserDefaultsKeys.timerSnapshotDate)
+        defaults.set(isRunning, forKey: UserDefaultsKeys.timerSnapshotWasRunning)
+    }
+
+    private func recoverTimerSnapshotIfNeeded()
+    {
+        guard currentSession != nil
+        else
+        {
+            return
+        }
+
+        let defaults = UserDefaults.standard
+
+        guard let launchID = defaults.string(forKey: UserDefaultsKeys.launchID),
+              let lastSeenLaunchID = defaults.string(forKey: UserDefaultsKeys.lastSeenLaunchID),
+              launchID == lastSeenLaunchID
+        else
+        {
+            return
+        }
+
+        let snapshotSeconds = defaults.integer(forKey: UserDefaultsKeys.timerSnapshotSeconds)
+        let snapshotWasRunning = defaults.bool(forKey: UserDefaultsKeys.timerSnapshotWasRunning)
+
+        guard snapshotWasRunning,
+              let snapshotDate = defaults.object(forKey: UserDefaultsKeys.timerSnapshotDate) as? Date
+        else
+        {
+            timer.secondsElapsed = snapshotSeconds
+            return
+        }
+
+        let secondsSinceSnapshot = Int(Date.now.timeIntervalSince(snapshotDate))
+        timer.secondsElapsed = max(snapshotSeconds + secondsSinceSnapshot, 0)
+    }
+
+    private func deleteTimerSnapshotFromUserDefaults()
+    {
+        UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.lastSeenLaunchID)
+        UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.timerSnapshotSeconds)
+        UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.timerSnapshotDate)
+        UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.timerSnapshotWasRunning)
     }
 
     private func performPrimaryTimerAction()
