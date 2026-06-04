@@ -5,13 +5,13 @@ import SwiftData
 final class Goal
 {
     var id: UUID
-    var topicID: UUID?
+    var topicID: UUID
     var targetSecondsPerDay: TimeInterval
     var createdAt: Date
 
     init(
         id: UUID = UUID(),
-        topicID: UUID? = nil,
+        topicID: UUID,
         targetSecondsPerDay: TimeInterval,
         createdAt: Date = .now
     )
@@ -36,7 +36,7 @@ extension Goal
             createdAt: .now.addingTimeInterval(-172_800)
         ),
         Goal(
-            topicID: nil,
+            topicID: Topic.sampleData[1].id,
             targetSecondsPerDay: 7_200,
             createdAt: .now.addingTimeInterval(-86_400)
         ),

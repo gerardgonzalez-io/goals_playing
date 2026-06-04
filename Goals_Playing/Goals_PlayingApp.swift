@@ -4,6 +4,7 @@ import SwiftUI
 @main
 struct Goals_PlayingApp: App
 {
+    /*
     private enum UserDefaultsKeys
     {
         static let launchID = "launchID"
@@ -13,15 +14,16 @@ struct Goals_PlayingApp: App
         static let timerSnapshotDate = "timerSnapshotDate"
         static let timerSnapshotWasRunning = "timerSnapshotWasRunning"
     }
-
+    */
     let dataContainer = DataContainer()
+    /*
     let launchID = UUID()
 
     init()
     {
         prepareLaunchState()
     }
-
+    */
     var body: some Scene
     {
         WindowGroup
@@ -31,7 +33,7 @@ struct Goals_PlayingApp: App
         }
         .modelContainer(dataContainer.modelContainer)
     }
-
+    /*
     private func prepareLaunchState()
     {
         let defaults = UserDefaults.standard
@@ -98,4 +100,5 @@ struct Goals_PlayingApp: App
         defaults.removeObject(forKey: UserDefaultsKeys.timerSnapshotDate)
         defaults.removeObject(forKey: UserDefaultsKeys.timerSnapshotWasRunning)
     }
+    */
 }

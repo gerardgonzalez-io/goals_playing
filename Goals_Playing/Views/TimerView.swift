@@ -4,6 +4,7 @@ import SwiftUI
 struct TimerView: View
 {
     @Environment(\.modelContext) private var modelContext
+    /*
     @Environment(\.scenePhase) private var scenePhase
 
     private enum UserDefaultsKeys
@@ -15,7 +16,7 @@ struct TimerView: View
         static let timerSnapshotDate = "timerSnapshotDate"
         static let timerSnapshotWasRunning = "timerSnapshotWasRunning"
     }
-
+    */
     let topicID: UUID
     let topicName: String
 
@@ -100,6 +101,7 @@ struct TimerView: View
             catch
             {}
         }
+        /*
         .onChange(of: scenePhase)
         { _, newScenePhase in
             if newScenePhase == .active
@@ -112,6 +114,7 @@ struct TimerView: View
                 saveTimerSnapshotInUserDefaults()
             }
         }
+        */
     }
 
     private var topicCard: some View
@@ -145,12 +148,9 @@ struct TimerView: View
                 currentInterval == nil
         else
         {
-            print("start - return")
             return
         }
-        print("start - in")
-        print("Session: \(String(describing: currentSession))")
-        print("Interval: \(String(describing: currentInterval))")
+
         let now = Date.now
 
         let session = StudySession(
@@ -180,13 +180,8 @@ struct TimerView: View
         guard currentSession != nil
         else
         {
-            print("stop - return")
             return
         }
-        print("stop - in")
-        
-        print("Session: \(String(describing: currentSession))")
-        print("Interval: \(String(describing: currentInterval))")
     
         let now = Date.now
 
@@ -198,7 +193,7 @@ struct TimerView: View
         }
 
         try modelContext.save()
-        deleteSessionIDFromUserDefaults()
+        //deleteSessionIDFromUserDefaults()
 
         currentSession = nil
         currentInterval = nil
@@ -212,11 +207,8 @@ struct TimerView: View
                 currentSession != nil
         else
         {
-            print("resume - return")
             return
         }
-        print("resume - in")
-        print("Interval: \(String(describing: currentInterval))")
 
         let now = Date.now
 
@@ -236,11 +228,9 @@ struct TimerView: View
         guard timer.isRunning == true
         else
         {
-            print("pause - return")
             return
         }
-        print("pause - in")
-        print("Interval: \(String(describing: currentInterval))")
+
         let now = Date.now
         
         currentInterval?.endDate = now
@@ -250,7 +240,7 @@ struct TimerView: View
         
         currentInterval = nil
     }
-
+    /*
     private func saveCurrentSessionIDInUserDefaults()
     {
         guard let currentSession
@@ -328,7 +318,7 @@ struct TimerView: View
         UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.timerSnapshotDate)
         UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.timerSnapshotWasRunning)
     }
-
+    */
     private func performPrimaryTimerAction()
     {
         do

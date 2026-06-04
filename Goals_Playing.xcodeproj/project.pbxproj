@@ -32,6 +32,7 @@
 		FD47E62D2FBF897900039A6B /* TimeCalculator_old.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD47E62C2FBF897900039A6B /* TimeCalculator_old.swift */; };
 		FD47E6302FBFA54D00039A6B /* StreakCalculator_old.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD47E62F2FBFA54D00039A6B /* StreakCalculator_old.swift */; };
 		FD6035222FC4DDFF0030E0F6 /* NavigationOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6035212FC4DDFF0030E0F6 /* NavigationOptions.swift */; };
+		FDF5E79A2FD1EA3600CB662C /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF5E7992FD1EA3600CB662C /* CalendarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		FD47E62E2FBF9C3F00039A6B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		FD47E62F2FBFA54D00039A6B /* StreakCalculator_old.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakCalculator_old.swift; sourceTree = "<group>"; };
 		FD6035212FC4DDFF0030E0F6 /* NavigationOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationOptions.swift; sourceTree = "<group>"; };
+		FDF5E7992FD1EA3600CB662C /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 				FD3577B92FB770D6004F169D /* TopicDetailView.swift */,
 				FD3577BD2FB775A3004F169D /* TimesView.swift */,
 				FD03C5242FCDD2EB00EA1718 /* StreakView.swift */,
+				FDF5E7992FD1EA3600CB662C /* CalendarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				FD47E6302FBFA54D00039A6B /* StreakCalculator_old.swift in Sources */,
 				FD3577BA2FB770D6004F169D /* TopicDetailView.swift in Sources */,
 				FD35775A2FB665B3004F169D /* StudySession.swift in Sources */,
+				FDF5E79A2FD1EA3600CB662C /* CalendarView.swift in Sources */,
 				FD3577B42FB76656004F169D /* StudySessionTimer.swift in Sources */,
 				FD47E5B02FBE00B900039A6B /* GoalEvaluator_old.swift in Sources */,
 				FD3577B62FB76CDC004F169D /* TopicEntryView.swift in Sources */,

@@ -35,6 +35,15 @@ struct TopicDetailView: View
                     symbol: "clock.fill"
                 )
             }
+
+            NavigationLink(value: TopicDetailRoute.calendarView)
+            {
+                topicCard(
+                    title: "Calendar",
+                    subtitle: "See if you are on track to meet your study goals.",
+                    symbol: "calendar"
+                )
+            }
         }
         .navigationTitle(topicName)
         .navigationBarTitleDisplayMode(.inline)
@@ -48,6 +57,8 @@ struct TopicDetailView: View
                 StreakView(topicID: topicID, topicName: topicName)
             case .timesView:
                 TimesView(topicID: topicID, topicName: topicName)
+            case .calendarView:
+                CalendarView(topicID: topicID, topicName: topicName)
             }
         }
     }
@@ -79,6 +90,7 @@ private enum TopicDetailRoute: Hashable
     case timerView
     case streakView
     case timesView
+    case calendarView
 }
 
 #Preview
