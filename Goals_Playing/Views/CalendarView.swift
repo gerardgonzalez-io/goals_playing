@@ -22,7 +22,8 @@ struct CalendarView: View
 
     private var topicGoals: [Goal]
     {
-        allGoals.filter { goal in
+        allGoals.filter
+        { goal in
             goal.topicID == nil || goal.topicID == topicID
         }
     }
