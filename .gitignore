@@ -9,6 +9,7 @@
 *.xccheckout
 *.moved-aside
 xcuserdata/
+**/xcuserdata/
 *.xcworkspace/xcuserdata/
 *.xcodeproj/xcuserdata/
 
