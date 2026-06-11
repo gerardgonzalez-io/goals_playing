@@ -22,51 +22,32 @@ struct StreakView: View
 
     var body: some View
     {
-        VStack(spacing: 16)
+        VStack(alignment: .leading, spacing: 16)
         {
             Text(topicName)
                 .font(.headline)
                 .foregroundStyle(.secondary)
-
-            streakCard(
-                title: "Current Streak",
-                symbol: "flame.fill",
-                value: currentStreak,
-                description: "Consecutive study days up to today or yesterday."
+                .frame(maxWidth: .infinity, alignment: .leading)
+    
+            Text("Your streaks")
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+    
+            StreakSummaryCard(
+                title: "Current streak",
+                current: currentStreak,
+                subtitle: "Consecutive study days up to today or yesterday."
             )
+            .frame(maxWidth: .infinity)
+            .frame(height: 300)
 
             Spacer()
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
         .navigationTitle("Streak")
         .navigationBarTitleDisplayMode(.inline)
     }
-
-    private func streakCard(title: String, symbol: String, value: Int, description: String) -> some View
-    {
-        VStack(alignment: .leading, spacing: 8)
-        {
-            HStack
-            {
-                Label(title, systemImage: symbol)
-                    .font(.headline)
-                Spacer()
-            }
-
-            Text("\(value) day\(value == 1 ? "" : "s")")
-                .font(.system(size: 34, weight: .bold, design: .rounded))
-                .monospacedDigit()
-
-            Text(description)
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(16)
-        .background(Color(.secondarySystemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 14))
-    }
-
 }
 
 #Preview

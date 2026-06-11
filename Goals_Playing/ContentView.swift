@@ -13,17 +13,45 @@ struct ContentView: View
     {
         NavigationStack
         {
-            List
+            ScrollView
             {
-                ForEach(NavigationOptions.mainPages)
-                { page in
-                    NavigationLink(value: page)
+                VStack(alignment: .leading, spacing: 20)
+                {
+                    Text("Summary")
+                        .font(.largeTitle.bold())
+                        .padding(.top, 8)
+
+                    Text("Your only job: be a bit better than yesterday.")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+
+                    VStack(spacing: 12)
                     {
-                        Label(page.name, systemImage: page.symbolName)
+                        NavigationLink(value: NavigationOptions.topics)
+                        {
+                            SummaryCard(
+                                title: "Topics",
+                                subtitle: "Manage what you study and start focus sessions.",
+                                systemImage: "list.bullet.rectangle",
+                                showsChevron: true
+                            )
+                        }
+                        .buttonStyle(.plain)
+
+                        NavigationLink(value: NavigationOptions.achievements)
+                        {
+                            SummaryCard(
+                                title: "Achievements",
+                                subtitle: "Review your progress and completed milestones.",
+                                systemImage: "medal.fill",
+                                showsChevron: true
+                            )
+                        }
+                        .buttonStyle(.plain)
                     }
                 }
+                .padding()
             }
-            .navigationTitle("Goals")
             .navigationDestination(for: NavigationOptions.self)
             { page in
                 switch page

@@ -20,17 +20,10 @@ struct GoalView: View
 
     var body: some View
     {
-        VStack(spacing: 16)
+        Form
         {
-            Text(topicName)
-                .font(.headline)
-                .foregroundStyle(.secondary)
-
-            VStack(spacing: 8)
+            Section("Daily Goal")
             {
-                Text("Daily Goal")
-                    .font(.headline)
-
                 Picker("Hours", selection: $selectedHours)
                 {
                     ForEach(1...12, id: \.self)
@@ -41,53 +34,50 @@ struct GoalView: View
                 }
                 .pickerStyle(.wheel)
                 .frame(height: 140)
-
-                Button("Save Goal")
-                {
-                    saveGoal()
-                }
-                .buttonStyle(.borderedProminent)
+                
+                Text("Changes you make here apply starting today. Past days will keep the goal that was active on those dates.")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .padding(.top, 2)
             }
-            .frame(maxWidth: .infinity)
-            .padding(16)
-            .background(Color(.secondarySystemBackground))
-            .clipShape(RoundedRectangle(cornerRadius: 8))
 
-            List
+            Section("Goal History")
             {
-                Section("Goal History")
+                if topicGoals.isEmpty
                 {
-                    if topicGoals.isEmpty
-                    {
-                        Text("No goals yet.")
-                            .foregroundStyle(.secondary)
-                    }
-                    else
-                    {
-                        ForEach(topicGoals, id: \.id)
-                        { goal in
-                            HStack
-                            {
-                                VStack(alignment: .leading, spacing: 4)
-                                {
-                                    Text(formattedGoalTime(goal.targetSecondsPerDay))
-                                        .font(.headline)
-                                    Text(formattedDate(goal.createdAt))
-                                        .font(.caption)
-                                        .foregroundStyle(.secondary)
-                                }
+                    Text("No goals yet.")
+                        .foregroundStyle(.secondary)
+                }
+                else
+                {
+                    ForEach(topicGoals, id: \.id)
+                    { goal in
+                        HStack
+                        {
+                            Text(goal.createdAt, style: .date)
+                                .foregroundStyle(.primary)
 
-                                Spacer()
-                            }
+                            Spacer()
+
+                            Text(formattedGoalTime(goal.targetSecondsPerDay))
+                                .foregroundStyle(.secondary)
                         }
                     }
                 }
             }
-            .listStyle(.insetGrouped)
         }
-        .padding(.top)
         .navigationTitle("Goal")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar
+        {
+            ToolbarItem(placement: .topBarTrailing)
+            {
+                Button("Save")
+                {
+                    saveGoal()
+                }
+            }
+        }
     }
 
     private func saveGoal()
@@ -110,13 +100,9 @@ struct GoalView: View
     private func formattedGoalTime(_ seconds: TimeInterval) -> String
     {
         let hours = Int(seconds) / 3_600
-        return "\(hours) hour\(hours == 1 ? "" : "s") per day"
+        return "\(hours) hour\(hours == 1 ? "" : "s")"
     }
 
-    private func formattedDate(_ date: Date) -> String
-    {
-        date.formatted(date: .abbreviated, time: .shortened)
-    }
 }
 
 #Preview

@@ -7,52 +7,74 @@ struct TopicDetailView: View
 
     var body: some View
     {
-        List
+        ScrollView
         {
-            NavigationLink(value: TopicDetailRoute.timerView)
+            VStack(alignment: .leading, spacing: 24)
             {
-                topicCard(
-                    title: "Timer",
-                    subtitle: "Start or continue your study timer for this topic.",
-                    symbol: "play.circle.fill"
-                )
-            }
+                VStack(alignment: .leading, spacing: 12)
+                {
+                    Text("Focus session")
+                        .font(.headline)
 
-            NavigationLink(value: TopicDetailRoute.streakView)
-            {
-                topicCard(
-                    title: "Streak",
-                    subtitle: "Check your current and longest study streak.",
-                    symbol: "flame.fill"
-                )
-            }
+                    NavigationLink(value: TopicDetailRoute.timerView)
+                    {
+                        ActionCard(
+                            title: "Start focus session",
+                            subtitle: "Track a new study session for this topic",
+                            systemImage: "play.fill",
+                            showsChevron: true
+                        )
+                    }
+                    .buttonStyle(.plain)
+                }
 
-            NavigationLink(value: TopicDetailRoute.timesView)
-            {
-                topicCard(
-                    title: "Times",
-                    subtitle: "See daily and total accumulated study time.",
-                    symbol: "clock.fill"
-                )
-            }
+                VStack(alignment: .leading, spacing: 12)
+                {
+                    Text("Study History")
+                        .font(.headline)
 
-            NavigationLink(value: TopicDetailRoute.calendarView)
-            {
-                topicCard(
-                    title: "Calendar",
-                    subtitle: "See if you are on track to meet your study goals.",
-                    symbol: "calendar"
-                )
+                    NavigationLink(value: TopicDetailRoute.timesView)
+                    {
+                        TopicCard(
+                            systemImage: "clock.fill",
+                            title: "Study time",
+                            subtitle: "See daily and total accumulated study time."
+                        )
+                    }
+                    .buttonStyle(.plain)
+                    
+                    NavigationLink(value: TopicDetailRoute.streakView)
+                    {
+                        TopicCard(
+                            systemImage: "flame.fill",
+                            title: "Streak",
+                            subtitle: "Check your current and longest study streak."
+                        )
+                    }
+                    .buttonStyle(.plain)
+
+                    NavigationLink(value: TopicDetailRoute.calendarView)
+                    {
+                        TopicCard(
+                            systemImage: "calendar",
+                            title: "Calendar",
+                            subtitle: "See if you are on track to meet your goals."
+                        )
+                    }
+                    .buttonStyle(.plain)
+                    
+                    NavigationLink(value: TopicDetailRoute.goalView)
+                    {
+                        TopicCard(
+                            systemImage: "target",
+                            title: "Change goal",
+                            subtitle: "Change the goal of your topic."
+                        )
+                    }
+                    .buttonStyle(.plain)
+                }
             }
-            
-            NavigationLink(value: TopicDetailRoute.goalView)
-            {
-                topicCard(
-                    title: "Change goal",
-                    subtitle: "Change the goal of your topic.",
-                    symbol: "target"
-                )
-            }
+            .padding()
         }
         .navigationTitle(topicName)
         .navigationBarTitleDisplayMode(.inline)
@@ -72,27 +94,6 @@ struct TopicDetailView: View
                 GoalView(topicID: topicID, topicName: topicName)
             }
         }
-    }
-
-    private func topicCard(title: String, subtitle: String, symbol: String) -> some View
-    {
-        HStack(spacing: 12)
-        {
-            Image(systemName: symbol)
-                .font(.title3)
-                .foregroundStyle(.tint)
-                .frame(width: 28)
-
-            VStack(alignment: .leading, spacing: 4)
-            {
-                Text(title)
-                    .font(.headline)
-                Text(subtitle)
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-            }
-        }
-        .padding(.vertical, 8)
     }
 }
 

@@ -65,6 +65,11 @@ struct TopicListView: View
         .navigationTitle("Topics")
         .toolbar
         {
+            //ToolbarItem(placement: .topBarTrailing)
+            //{
+            //    EditButton()
+            //}
+
             ToolbarItem(placement: .topBarTrailing)
             {
                 Button

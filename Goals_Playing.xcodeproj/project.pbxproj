@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		FD03C5252FCDD2EB00EA1718 /* StreakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD03C5242FCDD2EB00EA1718 /* StreakView.swift */; };
+		FD11A0842FD8523500D660D5 /* SummaryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD11A0832FD8523500D660D5 /* SummaryCard.swift */; };
+		FD11A0862FD9A85600D660D5 /* TopicCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD11A0852FD9A85600D660D5 /* TopicCard.swift */; };
+		FD11A0882FD9AC2B00D660D5 /* ActionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD11A0872FD9AC2B00D660D5 /* ActionCard.swift */; };
+		FD11A08A2FD9B38100D660D5 /* TimeSummaryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD11A0892FD9B38100D660D5 /* TimeSummaryCard.swift */; };
+		FD11A08C2FD9B46400D660D5 /* StreakSummaryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD11A08B2FD9B46400D660D5 /* StreakSummaryCard.swift */; };
+		FD11A08E2FDB10C600D660D5 /* TimerTopicCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD11A08D2FDB10C600D660D5 /* TimerTopicCard.swift */; };
 		FD3577412FB65CB7004F169D /* Goals_PlayingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD35773F2FB65CB7004F169D /* Goals_PlayingApp.swift */; };
 		FD3577422FB65CB7004F169D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD35773E2FB65CB7004F169D /* ContentView.swift */; };
 		FD3577432FB65CB7004F169D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD35773D2FB65CB7004F169D /* Assets.xcassets */; };
@@ -57,6 +63,12 @@
 
 /* Begin PBXFileReference section */
 		FD03C5242FCDD2EB00EA1718 /* StreakView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakView.swift; sourceTree = "<group>"; };
+		FD11A0832FD8523500D660D5 /* SummaryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryCard.swift; sourceTree = "<group>"; };
+		FD11A0852FD9A85600D660D5 /* TopicCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCard.swift; sourceTree = "<group>"; };
+		FD11A0872FD9AC2B00D660D5 /* ActionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionCard.swift; sourceTree = "<group>"; };
+		FD11A0892FD9B38100D660D5 /* TimeSummaryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSummaryCard.swift; sourceTree = "<group>"; };
+		FD11A08B2FD9B46400D660D5 /* StreakSummaryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakSummaryCard.swift; sourceTree = "<group>"; };
+		FD11A08D2FDB10C600D660D5 /* TimerTopicCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTopicCard.swift; sourceTree = "<group>"; };
 		FD35772F2FB65C78004F169D /* Goals_Playing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Goals_Playing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD35773D2FB65CB7004F169D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD35773E2FB65CB7004F169D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -116,6 +128,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FD11A0822FD8522800D660D5 /* Cards */ = {
+			isa = PBXGroup;
+			children = (
+				FD11A0832FD8523500D660D5 /* SummaryCard.swift */,
+				FD11A0852FD9A85600D660D5 /* TopicCard.swift */,
+				FD11A0872FD9AC2B00D660D5 /* ActionCard.swift */,
+				FD11A0892FD9B38100D660D5 /* TimeSummaryCard.swift */,
+				FD11A08B2FD9B46400D660D5 /* StreakSummaryCard.swift */,
+				FD11A08D2FDB10C600D660D5 /* TimerTopicCard.swift */,
+			);
+			path = Cards;
+			sourceTree = "<group>";
+		};
 		FD3577262FB65C78004F169D = {
 			isa = PBXGroup;
 			children = (
@@ -180,6 +205,7 @@
 		FD3577562FB66386004F169D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FD11A0822FD8522800D660D5 /* Cards */,
 				FD3577BB2FB7741C004F169D /* TimerView.swift */,
 				FD3577B52FB76CDC004F169D /* TopicEntryView.swift */,
 				FD3577B72FB76CDD004F169D /* TopicListView.swift */,
@@ -355,6 +381,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD11A08C2FD9B46400D660D5 /* StreakSummaryCard.swift in Sources */,
 				FD3577BE2FB775A3004F169D /* TimesView.swift in Sources */,
 				FD3577412FB65CB7004F169D /* Goals_PlayingApp.swift in Sources */,
 				FD3577582FB665B3004F169D /* Topic.swift in Sources */,
@@ -364,11 +391,15 @@
 				FDF5E79A2FD1EA3600CB662C /* CalendarView.swift in Sources */,
 				FD3577B42FB76656004F169D /* StudySessionTimer.swift in Sources */,
 				FD47E5B02FBE00B900039A6B /* GoalEvaluator_old.swift in Sources */,
+				FD11A0882FD9AC2B00D660D5 /* ActionCard.swift in Sources */,
 				FD3577B62FB76CDC004F169D /* TopicEntryView.swift in Sources */,
 				FD47E62B2FBF50F100039A6B /* SessionInterval.swift in Sources */,
 				FD35775C2FB665B5004F169D /* Goal.swift in Sources */,
+				FD11A0842FD8523500D660D5 /* SummaryCard.swift in Sources */,
 				FD3577AF2FB7561F004F169D /* GoalEvaluator.swift in Sources */,
+				FD11A0862FD9A85600D660D5 /* TopicCard.swift in Sources */,
 				FD3577422FB65CB7004F169D /* ContentView.swift in Sources */,
+				FD11A08E2FDB10C600D660D5 /* TimerTopicCard.swift in Sources */,
 				FD47E62D2FBF897900039A6B /* TimeCalculator_old.swift in Sources */,
 				FD6035222FC4DDFF0030E0F6 /* NavigationOptions.swift in Sources */,
 				FD3577B82FB76CDD004F169D /* TopicListView.swift in Sources */,
@@ -378,6 +409,7 @@
 				FD35775E2FB66743004F169D /* DataContainer.swift in Sources */,
 				FDF5E79C2FD1F7C600CB662C /* GoalView.swift in Sources */,
 				FD3577BC2FB7741C004F169D /* TimerView.swift in Sources */,
+				FD11A08A2FD9B38100D660D5 /* TimeSummaryCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

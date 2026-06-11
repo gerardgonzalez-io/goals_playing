@@ -50,23 +50,35 @@ struct TimerView: View
     {
         VStack(spacing: 20)
         {
-            topicCard
+            TimerTopicCard(topicName: topicName)
             
             Spacer()
             
             Text(formattedTime(currentElapsed))
-                .font(.system(size: 52, weight: .bold, design: .rounded))
+                .font(.system(size: 60, weight: .bold, design: .rounded))
                 .monospacedDigit()
-
-            HStack(spacing: 12)
+            
+            Spacer()
+            
+            HStack(spacing: 24)
             {
-                Button(primaryButtonTitle)
+                Button
                 {
                     performPrimaryTimerAction()
                 }
-                .buttonStyle(.bordered)
-
-                Button("Stop")
+                label:
+                {
+                    timerActionButtonLabel(
+                        title: primaryButtonTitle,
+                        isEnabled: true,
+                        isPrimary: true
+                    )
+                }
+                .buttonStyle(.plain)
+                
+                Spacer()
+                
+                Button
                 {
                     do
                     {
@@ -75,7 +87,15 @@ struct TimerView: View
                     catch
                     {}
                 }
-                .buttonStyle(.bordered)
+                label:
+                {
+                    timerActionButtonLabel(
+                        title: "Stop",
+                        isEnabled: currentSession != nil,
+                        isPrimary: false
+                    )
+                }
+                .buttonStyle(.plain)
                 .disabled(currentSession == nil)
             }
             
@@ -117,28 +137,46 @@ struct TimerView: View
         */
     }
 
-    private var topicCard: some View
+    private func timerActionButtonLabel(title: String, isEnabled: Bool, isPrimary: Bool) -> some View
     {
-        HStack(spacing: 12)
-        {
-            Image(systemName: "book.fill")
-                .foregroundStyle(.tint)
-                .font(.title3)
-
-            VStack(alignment: .leading, spacing: 4)
+        Circle()
+            .fill(timerActionButtonFill(isEnabled: isEnabled, isPrimary: isPrimary))
+            .frame(width: 96, height: 96)
+            .shadow(
+                color: isEnabled ? Color("GoalPurple").opacity(0.28) : .clear,
+                radius: 16,
+                x: 0,
+                y: 8
+            )
+            .overlay
             {
-                Text("Studying Topic")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                Text(topicName)
-                    .font(.headline)
+                Text(title)
+                    .font(.title3.weight(.semibold))
+                    .foregroundStyle(isEnabled ? Color.white : Color.secondary)
             }
+    }
 
-            Spacer()
+    private func timerActionButtonFill(isEnabled: Bool, isPrimary: Bool) -> AnyShapeStyle
+    {
+        guard isEnabled else
+        {
+            return AnyShapeStyle(Color(.secondarySystemFill))
         }
-        .padding(14)
-        .background(Color(.secondarySystemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 12))
+
+        if isPrimary
+        {
+            return AnyShapeStyle(
+                LinearGradient(
+                    colors: [Color("GoalLightPurple"), Color("GoalPurple")],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            )
+        }
+        else
+        {
+            return AnyShapeStyle(Color.accentColor)
+        }
     }
 
     private func startSession() throws
