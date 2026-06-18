@@ -1,13 +1,5 @@
 import Foundation
 
-/// Evaluates daily goal completion using interval-based study time and timestamp-level goal activation.
-///
-/// Behavior:
-/// - Study time is computed from `SessionInterval` overlap per day.
-/// - Goal activation is resolved with hour/minute precision (`goal.createdAt`), not only by calendar day.
-/// - For each day, the active goal is the latest goal created at or before that day's first study timestamp.
-/// - Result keys remain `startOfDay` dates for studied days only.
-///
 struct GoalEvaluator {
     let calendar = Calendar.current
 

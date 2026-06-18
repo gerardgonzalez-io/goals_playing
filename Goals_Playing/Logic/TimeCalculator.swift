@@ -1,14 +1,5 @@
 import Foundation
 
-/// Utility for calculating study time from session intervals (real active study time).
-///
-/// Global behavior:
-/// - A `StudySession` can contain multiple `SessionInterval` values to represent pause/resume cycles.
-/// - Time is always calculated from interval ranges, not from the session's outer start/end dates.
-/// - `dailyTime` sums only the overlap between each interval and the requested day, so intervals
-///   crossing midnight are automatically split across days.
-/// - `totalTime` sums the full duration of all intervals across all sessions.
-///
 struct TimeCalculator
 {
     /*

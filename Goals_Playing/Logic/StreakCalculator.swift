@@ -1,26 +1,6 @@
 // Logic before apply improvement of performance with agent
 import Foundation
 
-/// Utility for calculating study streaks from session intervals (real active study time).
-///
-/// Streak rules:
-/// - A day counts toward the streak when at least one interval overlaps that day.
-/// - The streak is still active if the user studied yesterday (even if not today).
-/// - The streak breaks after one full missed day between successful days.
-///
-/// How it works:
-/// - Input: `[StudySession]`, where each session can contain multiple `SessionInterval` values.
-/// - Intervals are the source of truth; session outer `startDate`/`endDate` do not define successful days.
-/// - If an interval crosses midnight, activity is split across each overlapped calendar day.
-/// - Output: `Int` representing the current consecutive-day streak up to today.
-///
-/// Examples:
-/// - Activity only today -> streak `1`.
-/// - No activity today, but activity yesterday -> streak `1`.
-/// - Activity on today and yesterday -> streak `2`.
-/// - Activity on today and two days ago, but not yesterday -> streak `1` (gap breaks streak).
-/// - Activity on yesterday and two days ago, but not today -> streak `2` (active from yesterday).
-///
  struct StreakCalculator
  {
      let calendar = Calendar.current

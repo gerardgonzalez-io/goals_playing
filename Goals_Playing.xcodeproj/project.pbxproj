@@ -14,6 +14,7 @@
 		FD11A08A2FD9B38100D660D5 /* TimeSummaryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD11A0892FD9B38100D660D5 /* TimeSummaryCard.swift */; };
 		FD11A08C2FD9B46400D660D5 /* StreakSummaryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD11A08B2FD9B46400D660D5 /* StreakSummaryCard.swift */; };
 		FD11A08E2FDB10C600D660D5 /* TimerTopicCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD11A08D2FDB10C600D660D5 /* TimerTopicCard.swift */; };
+		FD11A0D92FE1A00A00D660D5 /* Documentation.docc in Sources */ = {isa = PBXBuildFile; fileRef = FD11A0D82FE1A00A00D660D5 /* Documentation.docc */; };
 		FD3577412FB65CB7004F169D /* Goals_PlayingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD35773F2FB65CB7004F169D /* Goals_PlayingApp.swift */; };
 		FD3577422FB65CB7004F169D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD35773E2FB65CB7004F169D /* ContentView.swift */; };
 		FD3577432FB65CB7004F169D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD35773D2FB65CB7004F169D /* Assets.xcassets */; };
@@ -69,6 +70,7 @@
 		FD11A0892FD9B38100D660D5 /* TimeSummaryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSummaryCard.swift; sourceTree = "<group>"; };
 		FD11A08B2FD9B46400D660D5 /* StreakSummaryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakSummaryCard.swift; sourceTree = "<group>"; };
 		FD11A08D2FDB10C600D660D5 /* TimerTopicCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTopicCard.swift; sourceTree = "<group>"; };
+		FD11A0D82FE1A00A00D660D5 /* Documentation.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Documentation.docc; sourceTree = "<group>"; };
 		FD35772F2FB65C78004F169D /* Goals_Playing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Goals_Playing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD35773D2FB65CB7004F169D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD35773E2FB65CB7004F169D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 		FD3577262FB65C78004F169D = {
 			isa = PBXGroup;
 			children = (
+				FD11A0D82FE1A00A00D660D5 /* Documentation.docc */,
 				FD47E62E2FBF9C3F00039A6B /* README.md */,
 				FD3577402FB65CB7004F169D /* Goals_Playing */,
 				FD35776D2FB676A0004F169D /* Goals_PlayingTests */,
@@ -394,6 +397,7 @@
 				FD11A0882FD9AC2B00D660D5 /* ActionCard.swift in Sources */,
 				FD3577B62FB76CDC004F169D /* TopicEntryView.swift in Sources */,
 				FD47E62B2FBF50F100039A6B /* SessionInterval.swift in Sources */,
+				FD11A0D92FE1A00A00D660D5 /* Documentation.docc in Sources */,
 				FD35775C2FB665B5004F169D /* Goal.swift in Sources */,
 				FD11A0842FD8523500D660D5 /* SummaryCard.swift in Sources */,
 				FD3577AF2FB7561F004F169D /* GoalEvaluator.swift in Sources */,
@@ -577,6 +581,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CJTYATR4VT;
+				DOCC_ENABLE_CXX_SUPPORT = NO;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -610,6 +615,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CJTYATR4VT;
+				DOCC_ENABLE_CXX_SUPPORT = NO;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
